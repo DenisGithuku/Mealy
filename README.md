@@ -1,3 +1,3 @@
 # Mealy
 
-## Made with ❤️ ewith Jetpack Compose
+## Made with ❤️ and Jetpack Compose
