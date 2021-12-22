@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -14,16 +12,12 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.denisgithuku.mealy.presentation.components.Navigator
+import com.denisgithuku.mealy.presentation.util.Navigator
 import com.denisgithuku.mealy.presentation.components.home.BottomBar
-import com.denisgithuku.mealy.presentation.components.home.TopRow
 import com.denisgithuku.mealy.presentation.components.meal_details.CustomTopAppBar
 import com.denisgithuku.mealy.presentation.theme.MealyTheme
 import com.denisgithuku.mealy.presentation.util.Screen
