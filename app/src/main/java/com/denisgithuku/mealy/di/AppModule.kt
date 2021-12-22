@@ -4,10 +4,7 @@ import com.denisgithuku.mealy.common.Constants
 import com.denisgithuku.mealy.data.remote.MealApiService
 import com.denisgithuku.mealy.data.repositories.DefaultMealRepositoryImpl
 import com.denisgithuku.mealy.domain.repositories.MealRepository
-import com.denisgithuku.mealy.domain.use_cases.GetAllMealCategories
-import com.denisgithuku.mealy.domain.use_cases.GetMealPreparationDetails
-import com.denisgithuku.mealy.domain.use_cases.GetMealsInCategory
-import com.denisgithuku.mealy.domain.use_cases.MealUseCases
+import com.denisgithuku.mealy.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +42,8 @@ object AppModule {
         return MealUseCases(
             getAllMealCategories = GetAllMealCategories(repository),
             getMealPreparationDetails = GetMealPreparationDetails(repository),
-            getMealsInCategory = GetMealsInCategory(repository)
+            getMealsInCategory = GetMealsInCategory(repository),
+            searchMeal = SearchMeal(repository)
         )
     }
 }

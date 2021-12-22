@@ -18,4 +18,8 @@ class DefaultMealRepositoryImpl(
     override suspend fun getMealPreparationDetails(mealId: String): MealPreparationResponse {
         return mealApiService.getMealPreparationDetails(mealId)
     }
+
+    override suspend fun searchMealByName(query: String): SearchMealResponse {
+        return mealApiService.searchMealByName(query)
+    }
 }

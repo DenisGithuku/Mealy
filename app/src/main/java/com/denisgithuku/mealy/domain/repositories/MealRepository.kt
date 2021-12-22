@@ -9,4 +9,6 @@ interface MealRepository {
     suspend fun getMealsInCategory(category: String): MealInCategoryResponse
 
     suspend fun getMealPreparationDetails(mealId: String): MealPreparationResponse
+
+    suspend fun searchMealByName(query: String): SearchMealResponse
 }

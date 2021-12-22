@@ -1,4 +1,4 @@
-package com.denisgithuku.mealy.presentation.components
+package com.denisgithuku.mealy.presentation.util
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ScaffoldState
@@ -28,7 +28,7 @@ fun Navigator(
             HomeScreen(scaffoldState, navController = navController)
         }
         composable(Screen.Search.route) {
-            SearchScreen()
+            SearchScreen(navController = navController)
         }
         composable(Screen.Favorites.route) {
             FavoritesScreen()
