@@ -60,7 +60,6 @@ class MainActivity : ComponentActivity() {
                                 screens = screens,
                                 onNavigate = { destination ->
                                     navController.navigate(destination.route) {
-                                        navOptions {
                                             navController.graph.startDestinationRoute?.let { screen_route ->
                                                 popUpTo(screen_route) {
                                                     saveState = true
@@ -69,7 +68,6 @@ class MainActivity : ComponentActivity() {
                                             launchSingleTop = true
                                             restoreState = true
                                         }
-                                    }
                                     navController.enableOnBackPressed(true)
                                 }
                             )

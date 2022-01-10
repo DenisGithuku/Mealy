@@ -5,6 +5,8 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +18,7 @@ import com.denisgithuku.mealy.presentation.components.search.SearchScreen
 import com.denisgithuku.mealy.presentation.components.settings.SettingsScreen
 import com.denisgithuku.mealy.presentation.util.Screen
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
 @InternalCoroutinesApi
@@ -32,7 +35,6 @@ fun Navigator(
                 scaffoldState,
                 onOpenMeal = { meal ->
                     navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}") {
-                        navOptions {
                             navController.graph.startDestinationRoute?.let { screen_route ->
                                 popUpTo(screen_route) {
                                     inclusive = true
@@ -40,7 +42,6 @@ fun Navigator(
                                 }
                                 restoreState = true
                             }
-                        }
                     }
                 }
             )
@@ -49,7 +50,6 @@ fun Navigator(
             SearchScreen(
                 onNavigate = { meal ->
                     navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}") {
-                        navOptions {
                             navController.graph.startDestinationRoute?.let { screen_route ->
                                 popUpTo(screen_route) {
                                     inclusive = true
@@ -58,7 +58,6 @@ fun Navigator(
                                 restoreState = true
                             }
                         }
-                    }
                 }
             )
         }
