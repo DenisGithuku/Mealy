@@ -58,4 +58,10 @@ class MealDetailsViewModel @Inject constructor(
             }
         }
     }
+
+    fun refreshInstructions(instructions: List<String>) {
+        _state.value = _state.value.copy(
+            mealInstructions = instructions
+        )
+    }
 }

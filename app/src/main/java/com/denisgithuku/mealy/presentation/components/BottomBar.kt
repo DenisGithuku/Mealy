@@ -1,4 +1,4 @@
-package com.denisgithuku.mealy.presentation.components.home
+package com.denisgithuku.mealy.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
@@ -24,13 +25,10 @@ import com.denisgithuku.mealy.presentation.util.Screen
 
 @Composable
 fun BottomBar(
-    navController: NavController,
+    currentDestination: NavDestination?,
     screens: List<Screen>,
     onNavigate: (Screen) -> Unit
 ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-
     Row(
         modifier = Modifier
             .background(color = MaterialTheme.colors.surface)
