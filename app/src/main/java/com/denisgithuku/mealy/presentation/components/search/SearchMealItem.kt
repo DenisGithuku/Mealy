@@ -31,68 +31,58 @@ fun SearchMealItem(
     mealItem: MealInSearch,
     onClick: (MealInSearch) -> Unit
 ) {
-    Card(
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 10.dp)
+            .background(color = MaterialTheme.colors.surface)
+            .padding(8.dp)
             .clickable {
-                       onClick(mealItem)
+                onClick(mealItem)
             },
-        elevation = 12.dp,
-        shape = RoundedCornerShape(16.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+        Column(
             modifier = modifier
-                .fillMaxWidth()
-                .background(color = MaterialTheme.colors.surface)
-                .padding(6.dp),
+                .padding(8.dp)
+                .size(60.dp),
         ) {
-            Column(
-                modifier = modifier
-                    .padding(8.dp)
-                    .size(60.dp),
+            Card(
+                modifier = modifier.fillMaxSize(),
+                shape = RoundedCornerShape(16.dp),
+                elevation = 0.dp,
             ) {
-                Card(
-                    modifier = modifier.fillMaxSize(),
-                    shape = RoundedCornerShape(16.dp),
-                    elevation = 0.dp,
-                ) {
-                    Column(modifier = modifier.fillMaxSize()) {
-                        GlideImage(
-                            imageModel = mealItem.strMealThumb,
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.Center,
-                            loading = {
-                                ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-                                    val spinnerRef = createRef()
-                                    CircularProgressIndicator(
-                                        modifier = modifier.constrainAs(spinnerRef) {
-                                            top.linkTo(parent.top)
-                                            bottom.linkTo(parent.bottom)
-                                            start.linkTo(parent.start)
-                                            end.linkTo(parent.end)
-                                        }
-                                    )
-                                }
+                Column(modifier = modifier.fillMaxSize()) {
+                    GlideImage(
+                        imageModel = mealItem.strMealThumb,
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center,
+                        loading = {
+                            ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+                                val spinnerRef = createRef()
+                                CircularProgressIndicator(
+                                    modifier = modifier.constrainAs(spinnerRef) {
+                                        top.linkTo(parent.top)
+                                        bottom.linkTo(parent.bottom)
+                                        start.linkTo(parent.start)
+                                        end.linkTo(parent.end)
+                                    }
+                                )
                             }
-                        )
-                    }
+                        }
+                    )
                 }
             }
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = mealItem.strMeal,
-                    style = TextStyle(
-                        color = Color.Black.copy(alpha = 0.7f),
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center
-                    )
+        }
+        Column {
+            Text(
+                text = mealItem.strMeal,
+                style = TextStyle(
+                    color = Color.Black.copy(alpha = 0.7f),
+                    fontSize = 14.sp,
+                    textAlign = TextAlign.Center
                 )
-            }
+            )
         }
     }
 }

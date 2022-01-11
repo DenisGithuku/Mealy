@@ -35,13 +35,11 @@ fun Navigator(
                 scaffoldState,
                 onOpenMeal = { meal ->
                     navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}") {
-                            navController.graph.startDestinationRoute?.let { screen_route ->
-                                popUpTo(screen_route) {
+                                popUpTo(Screen.MealDetails.route) {
                                     inclusive = true
                                     saveState = true
                                 }
                                 restoreState = true
-                            }
                     }
                 }
             )
@@ -50,13 +48,11 @@ fun Navigator(
             SearchScreen(
                 onNavigate = { meal ->
                     navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}") {
-                            navController.graph.startDestinationRoute?.let { screen_route ->
-                                popUpTo(screen_route) {
+                                popUpTo(Screen.MealDetails.route) {
                                     inclusive = true
                                     saveState = true
                                 }
                                 restoreState = true
-                            }
                         }
                 }
             )

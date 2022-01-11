@@ -21,7 +21,7 @@ class GetAllMealCategories @Inject constructor(
             val categories = repository.getAllMealCategories().categories.map { it.toCategory() }
             emit(Resource.Success<List<Category>>(categories))
         }catch (e: Exception) {
-            emit(Resource.Error<List<Category>>(error = e.message ?: "An unexpected error happened"))
+            emit(Resource.Error<List<Category>>(error = e.localizedMessage ?: "An unexpected error happened"))
         }
     }.flowOn(Dispatchers.IO)
 }
