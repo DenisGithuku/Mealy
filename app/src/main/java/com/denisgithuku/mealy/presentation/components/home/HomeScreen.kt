@@ -1,5 +1,6 @@
 package com.denisgithuku.mealy.presentation.components.home
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

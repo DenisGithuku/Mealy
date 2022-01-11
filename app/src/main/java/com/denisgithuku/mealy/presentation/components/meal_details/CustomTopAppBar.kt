@@ -22,7 +22,7 @@ import com.denisgithuku.mealy.presentation.util.Screen
 
 @Composable
 fun CustomTopAppBar(
-    navController: NavController
+    onNavigateUp: () -> Unit
 ) {
     val context = LocalContext.current
     Row(
@@ -39,18 +39,7 @@ fun CustomTopAppBar(
                 .size(30.dp)
                 .background(color = Color.White, shape = CircleShape)
                 .clickable {
-                    navController
-                        .navigate(Screen.Home.route){
-                            navOptions {
-                                popUpTo(Screen.Home.route) {
-                                    saveState = true
-                                    inclusive = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        }
-
+                    onNavigateUp()
                 }
         ) {
             Icon(

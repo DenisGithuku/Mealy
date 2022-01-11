@@ -7,10 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -110,6 +107,7 @@ fun SearchScreen(
                         onClick = { meal ->
                             onNavigate(meal)
                         })
+                    Divider(color = Color.Black.copy(alpha = 0.2f), thickness = 0.8.dp, startIndent = 8.dp)
                 }
             })
     }
