@@ -16,10 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.denisgithuku.mealy.presentation.util.Navigator
-import com.denisgithuku.mealy.presentation.components.home.BottomBar
+import com.denisgithuku.mealy.presentation.components.BottomBar
 import com.denisgithuku.mealy.presentation.components.meal_details.CustomTopAppBar
 import com.denisgithuku.mealy.presentation.theme.MealyTheme
+import com.denisgithuku.mealy.presentation.util.Navigator
 import com.denisgithuku.mealy.presentation.util.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
@@ -49,36 +49,33 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     scaffoldState = scaffoldState,
                     topBar = {
-                             if(currentDestination == Screen.MealDetails.route) {
-                                 CustomTopAppBar(navController = navController)
-                             }
+                        if (currentDestination == Screen.MealDetails.route) {
+                            CustomTopAppBar(navController = navController)
+                        }
                     },
                     bottomBar = {
                         if (currentDestination != Screen.MealDetails.route) {
                             BottomBar(
-                                navController = navController,
+                                currentDestination = navBackStackEntry?.destination,
                                 screens = screens,
                                 onNavigate = { destination ->
                                     navController.navigate(destination.route) {
-                                        navOptions {
-                                            if (currentDestination != null) {
-                                                popUpTo(currentDestination) {
-                                                    inclusive = true
+                                            navController.graph.startDestinationRoute?.let { screen_route ->
+                                                popUpTo(screen_route) {
                                                     saveState = true
                                                 }
-                                                launchSingleTop = true
-                                                restoreState = true
                                             }
+                                            launchSingleTop = true
+                                            restoreState = true
                                         }
-                                    }
                                     navController.enableOnBackPressed(true)
                                 }
                             )
                         }
                     }
                 ) {
-                        Navigator(navController = navController, scaffoldState = scaffoldState)
-                    }
+                    Navigator(navController = navController, scaffoldState = scaffoldState)
+                }
             }
         }
     }

@@ -23,13 +23,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
+import com.denisgithuku.mealy.domain.model.MealInCategory
 import com.denisgithuku.mealy.presentation.util.Screen
 
 @ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(
     scaffoldState: ScaffoldState,
-    navController: NavController,
+    onOpenMeal: (MealInCategory) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeScreenState = homeViewModel.state.value
@@ -38,7 +39,9 @@ fun HomeScreen(
         scaffoldState = scaffoldState
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(bottom = 60.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 60.dp),
         ) {
             TopRow()
             if (!homeScreenState.isLoading && homeScreenState.error.isEmpty()) {
@@ -78,16 +81,9 @@ fun HomeScreen(
             LazyColumn {
                 items(homeScreenState.mealInEachCategory) { mealInEachCategory ->
                     MealItem(mealItem = mealInEachCategory, onClick = { meal ->
-                        navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}"){
-                            navOptions {
-                                popUpTo(Screen.Home.route) {
-                                    inclusive = true
-                                    saveState = true
-                                }
-                                restoreState = true
-                            }
-                        }
+                        onOpenMeal(meal)
                     })
+                    Divider(color = Color.Black.copy(alpha = 0.2f), thickness = 0.8.dp, startIndent = 8.dp)
                 }
             }
 

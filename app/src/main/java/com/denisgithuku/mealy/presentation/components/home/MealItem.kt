@@ -29,23 +29,16 @@ fun MealItem(
     mealItem: MealInCategory,
     onClick: (MealInCategory) -> Unit
 ) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 10.dp)
-            .clickable {
-                       onClick(mealItem)
-            },
-        elevation = 12.dp,
-        shape = RoundedCornerShape(16.dp)
-    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
             modifier = modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colors.surface)
-                .padding(6.dp),
+                .padding(8.dp)
+                .clickable {
+                    onClick(mealItem)
+                },
         ) {
             Column(
                 modifier = modifier
@@ -79,9 +72,7 @@ fun MealItem(
                     }
                 }
             }
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column {
                 Text(
                     text = mealItem.strMeal,
                     style = TextStyle(
@@ -93,4 +84,3 @@ fun MealItem(
             }
         }
     }
-}

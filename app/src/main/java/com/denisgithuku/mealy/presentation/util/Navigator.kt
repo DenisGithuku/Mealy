@@ -1,12 +1,16 @@
 package com.denisgithuku.mealy.presentation.util
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navOptions
 import com.denisgithuku.mealy.presentation.components.favorites.FavoritesScreen
 import com.denisgithuku.mealy.presentation.components.home.HomeScreen
 import com.denisgithuku.mealy.presentation.components.meal_details.MealDetailScreen
@@ -14,7 +18,9 @@ import com.denisgithuku.mealy.presentation.components.search.SearchScreen
 import com.denisgithuku.mealy.presentation.components.settings.SettingsScreen
 import com.denisgithuku.mealy.presentation.util.Screen
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 
+@ExperimentalAnimationApi
 @InternalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
@@ -25,10 +31,35 @@ fun Navigator(
 ) {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
-            HomeScreen(scaffoldState, navController = navController)
+            HomeScreen(
+                scaffoldState,
+                onOpenMeal = { meal ->
+                    navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}") {
+                            navController.graph.startDestinationRoute?.let { screen_route ->
+                                popUpTo(screen_route) {
+                                    inclusive = true
+                                    saveState = true
+                                }
+                                restoreState = true
+                            }
+                    }
+                }
+            )
         }
         composable(Screen.Search.route) {
-            SearchScreen(navController = navController)
+            SearchScreen(
+                onNavigate = { meal ->
+                    navController.navigate(Screen.MealDetails.route + "/${meal.idMeal}") {
+                            navController.graph.startDestinationRoute?.let { screen_route ->
+                                popUpTo(screen_route) {
+                                    inclusive = true
+                                    saveState = true
+                                }
+                                restoreState = true
+                            }
+                        }
+                }
+            )
         }
         composable(Screen.Favorites.route) {
             FavoritesScreen()
@@ -37,7 +68,7 @@ fun Navigator(
             SettingsScreen()
         }
         composable(Screen.MealDetails.route + "/{mealId}") {
-            MealDetailScreen(scaffoldState = scaffoldState, navController = navController)
+            MealDetailScreen(scaffoldState = scaffoldState)
         }
     }
 }

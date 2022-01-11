@@ -49,7 +49,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
 fun MealDetailScreen(
     modifier: Modifier = Modifier,
     scaffoldState: ScaffoldState,
-    navController: NavController,
     mealDetailsViewModel: MealDetailsViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -74,6 +73,7 @@ fun MealDetailScreen(
             instructions.add(instruction)
         }
     }
+    mealDetailsViewModel.refreshInstructions(instructions)
     state.mealDetails.forEach { mealDetail ->
             Box(
                 modifier = modifier
@@ -170,9 +170,9 @@ fun MealDetailScreen(
                                         modifier = Modifier.padding(8.dp)
                                     )
                                 }
-                                instructions.forEach { instruction ->
+                                state.mealInstructions.forEach { instruction ->
                                     Text(
-                                        text = "${instructions.indexOf(instruction) + 1}. $instruction",
+                                        text = "${state.mealInstructions.indexOf(instruction) + 1}. $instruction",
                                         modifier = Modifier.padding(vertical = 2.dp, horizontal = 4.dp)
                                     )
                                 }

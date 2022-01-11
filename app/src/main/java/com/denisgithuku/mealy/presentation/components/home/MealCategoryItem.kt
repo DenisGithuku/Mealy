@@ -31,7 +31,7 @@ fun MealCategoryItem(
     onClick: (String) -> Unit
 ) {
     Card(
-        elevation = 14.dp,
+        elevation = 0.dp,
         shape = RoundedCornerShape(16.dp),
         modifier = modifier
             .size(100.dp)
